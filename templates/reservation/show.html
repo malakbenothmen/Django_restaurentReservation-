@@ -1,0 +1,152 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js" crossorigin="anonymous"></script>
+
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load static %}
+	<link rel="apple-touch-icon" href="{% static 'images/apple-touch-icon.png' %}">
+	<!-- Start header -->
+	<header class="top-navbar">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<div class="container">
+				<a class="navbar-brand" href="/home">
+					<img src="{% static 'images/about-bg.png' %}" alt="" />
+				</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbars-rs-food" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+				  <span class="navbar-toggler-icon"></span>
+                  <a class="btn btn-lg btn-circle btn-outline-new-white" href="/home">logout</a>
+				</button>
+				<div class="collapse navbar-collapse" id="navbars-rs-food">
+					<ul class="navbar-nav ml-auto">
+                        <a class="btn btn-lg btn-circle btn-outline-new-white" href="/home">logout</a>
+
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	<!-- End header -->
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>List des Reservation</title>
+
+        <script src="https://kit.fontawesome.com/YOUR_KIT_CODE.js" crossorigin="anonymous"></script>
+
+        <!-- Link to Bootstrap CSS from CDN -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <!-- Link to your custom CSS -->
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <style>
+            /* Add your custom styles here */
+            .orange-shadow {
+                box-shadow: 0 4px 8px rgba(255, 166, 0, 0.355);
+            }
+
+            .btn-orange {
+                background-color: #ff8800;
+                border-color: #dc930d;
+                color: #fff;
+            }
+
+            .table-header {
+                background: linear-gradient(45deg, #8B4513, #CD853F);
+                color: #fff;
+            }
+            .btn-transparent i {
+                transition: transform 0.3s ease-in-out; /* Adding a smooth transition effect */
+            }
+
+            .btn-transparent:hover i {
+                transform: scale(1.5);
+                 /* Zoom in on hover */
+            }
+            h1 {
+            font-weight: bold;
+            color: orange;
+            text-align: center;
+            margin-bottom: 20px; /* Ajouter une marge en bas pour déplacer le titre vers le bas */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5; /* Changer la couleur de fond au survol */
+        }
+                </style>
+    </head>
+
+    <body>
+        <br><br> 
+        
+        <div class="container mt-5">
+            <h1 class="font-weight-bold text-center text-orange">Liste des Réservations</h1>
+            <table class="table table-striped orange-shadow">
+                <thead class="thead-brown table-header">
+                    <tr>
+                        <th scope="col">CIN Client</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Time</th>
+                        <th scope="col">Nb Personne</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for tab in toutrev %}
+                    <tr>
+                        <td>{{ tab.cin }}</td>
+                        <td>{{ tab.username }}</td>
+                        <td>{{ tab.email }}</td>
+                        <td>{{ tab.numtel }}</td>
+                        <td>{{ tab.date }}</td>
+                        <td>{{ tab.time }}</td>
+                        <td>{{ tab.nbPersonne }}</td>
+                        <td style="display: flex;">
+                            <a href="edit/{{ tab.id }}" class="btn btn-transparent btn-sm" title="Edit">
+                                <i class="fas fa-edit" style="color: rgb(255, 140, 0);"></i>
+                            </a>
+                            
+                            <a href="delete/{{ tab.id }}" class="btn btn-transparent btn-sm" title="Delete">
+                                <i class="fas fa-trash-alt" style="color: brown;"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <h2 style="background-color: rgba(165, 114, 42, 0.901); color:white; text-align:center;">total reservatinon :{{x}}</h2>
+             <br>
+            <div class="col-md-6 mx-auto text-center">
+                <a class="btn btn-orange btn-sm" href="/reservation">
+                    <i class="fas fa-plus"></i> Add New Reservation
+                </a>
+            </div>
+        </div>
+ <br><br><br><br>
+        <!-- Link to Font Awesome for icons -->
+        <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+        <!-- Link to Bootstrap JS and Popper.js from CDN -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+
+    
+{% endblock content %}
